@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>俄罗斯方块 - Modern Tetris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1 class="title">MODERN TETRIS</h1>
+
+    <div class="game-layout">
+      <div class="board-wrapper">
+        <canvas id="gameBoard" class="game-board"></canvas>
+        <canvas id="particleCanvas" class="particle-canvas"></canvas>
+        <div id="overlay" class="overlay">
+          <div class="overlay-content">
+            <h2 id="overlayTitle">俄罗斯方块</h2>
+            <p id="overlayMessage">准备好了吗？</p>
+            <button id="startBtn" class="modern-btn">开始游戏</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="side-panel">
+        <div class="panel-section">
+          <h3>下一个</h3>
+          <canvas id="nextPiece" width="120" height="120"></canvas>
+        </div>
+
+        <div class="panel-section">
+          <h3>分数</h3>
+          <div class="stat-display score" id="score">0</div>
+        </div>
+
+        <div class="panel-section">
+          <h3>等级</h3>
+          <div class="stat-display level" id="level">1</div>
+          <div class="level-bar">
+            <div class="level-progress" id="levelProgress"></div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3>行数</h3>
+          <div class="stat-display lines" id="lines">0</div>
+        </div>
+
+        <div class="panel-section">
+          <h3>最高分</h3>
+          <div class="stat-display highscore" id="highScore">0</div>
+        </div>
+
+        <div class="panel-section controls-section">
+          <button id="pauseBtn" class="modern-btn small">暂停</button>
+          <button id="resetBtn" class="modern-btn small secondary">重新开始</button>
+        </div>
+
+        <div class="panel-section">
+          <h3>操作说明</h3>
+          <div class="controls-info">
+            <div class="control-item"><span class="key">←</span> <span class="key">→</span> <span>移动</span></div>
+            <div class="control-item"><span class="key">↑</span> <span>旋转</span></div>
+            <div class="control-item"><span class="key">↓</span> <span>加速</span></div>
+            <div class="control-item"><span class="key">空格</span> <span>直接下落</span></div>
+            <div class="control-item"><span class="key">P</span> <span>暂停</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-controls" id="mobileControls">
+      <div class="mobile-btn-row">
+        <button class="mobile-btn" id="btnLeft">◀</button>
+        <button class="mobile-btn" id="btnRotate">↻</button>
+        <button class="mobile-btn" id="btnRight">▶</button>
+      </div>
+      <div class="mobile-btn-row">
+        <button class="mobile-btn wide" id="btnDown">▼ 加速</button>
+        <button class="mobile-btn wide" id="btnDrop">⏬ 直落</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

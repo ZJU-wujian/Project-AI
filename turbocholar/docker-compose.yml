@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: turbocholar-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - db_data:/app/turbocholar.db
+    environment:
+      - SECRET_KEY=change-this-to-a-secure-key-in-production
+      - DATABASE_URL=sqlite:///app/turbocholar.db
+    restart: unless-stopped
+
+  frontend:
+    image: nginx:alpine
+    container_name: turbocholar-frontend
+    ports:
+      - "3001:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  db_data:

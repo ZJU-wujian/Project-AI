@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TurboCholar - 简约版</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #ffffff; color: #1a1a1a; min-height: 100vh; }
+    
+    /* Header */
+    .header { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 1000; }
+    .header-content { max-width: 1400px; margin: 0 auto; padding: 0 2rem; height: 72px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 22px; font-weight: 700; color: #0f172a; letter-spacing: -0.5px; }
+    .logo span { color: #3b82f6; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: #64748b; font-size: 15px; font-weight: 500; text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #0f172a; }
+    .auth-buttons { display: flex; gap: 1rem; }
+    .btn-login { padding: 10px 20px; color: #475569; font-size: 14px; font-weight: 500; background: transparent; border: none; cursor: pointer; border-radius: 8px; transition: background 0.2s; }
+    .btn-login:hover { background: #f1f5f9; }
+    .btn-register { padding: 10px 24px; background: #0f172a; color: white; font-size: 14px; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.2s; }
+    .btn-register:hover { opacity: 0.9; }
+
+    /* Hero */
+    .hero { padding: 120px 2rem 80px; text-align: center; }
+    .hero h1 { font-size: 48px; font-weight: 800; color: #0f172a; margin-bottom: 1.5rem; line-height: 1.1; letter-spacing: -1px; }
+    .hero p { font-size: 1.25rem; color: #64748b; max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .search-box { max-width: 600px; margin: 0 auto; position: relative; }
+    .search-input { width: 100%; padding: 16px 20px 16px 56px; font-size: 16px; border: 1px solid #e2e8f0; border-radius: 14px; background: #f8fafc; transition: all 0.2s; }
+    .search-input:focus { outline: none; border-color: #3b82f6; background: white; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+    .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #94a3b8; }
+    .hero-stats { display: flex; justify-content: center; gap: 4rem; margin-top: 4rem; }
+    .stat { text-align: center; }
+    .stat-value { font-size: 2.5rem; font-weight: 700; color: #0f172a; }
+    .stat-label { font-size: 14px; color: #94a3b8; margin-top: 4px; }
+
+    /* Section */
+    .section { max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; }
+    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+    .section-title { font-size: 24px; font-weight: 700; color: #0f172a; }
+    .section-link { color: #3b82f6; font-size: 14px; font-weight: 500; text-decoration: none; }
+
+    /* Paper Grid */
+    .paper-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px; }
+    .paper-card { background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 28px; transition: all 0.3s; }
+    .paper-card:hover { border-color: #cbd5e1; box-shadow: 0 10px 40px rgba(0,0,0,0.05); transform: translateY(-2px); }
+    .card-header { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; }
+    .journal-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-nature { background: #3b82f6; }
+    .dot-science { background: #8b5cf6; }
+    .dot-cell { background: #ec4899; }
+    .journal-name { font-size: 13px; font-weight: 600; color: #64748b; }
+    .paper-title { font-size: 18px; font-weight: 600; color: #0f172a; line-height: 1.5; margin-bottom: 12px; }
+    .paper-abstract { font-size: 14px; color: #64748b; line-height: 1.6; margin-bottom: 16px; }
+    .paper-meta { display: flex; justify-content: space-between; align-items: center; color: #94a3b8; font-size: 13px; }
+    .paper-authors { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .citation-count { display: flex; align-items: center; gap: 4px; }
+
+    /* Footer */
+    .footer { background: #f8fafc; padding: 4rem 2rem; margin-top: 6rem; }
+    .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; }
+    .footer-brand { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 1rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { color: #64748b; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: #0f172a; }
+    .footer-bottom { max-width: 1400px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid #e2e8f0; text-align: center; color: #94a3b8; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">Turbo<span>Cholar</span></div>
+      <nav class="nav-links">
+        <a href="#" class="active">首页</a>
+        <a href="#">论文</a>
+        <a href="#">发现</a>
+        <a href="#">我的</a>
+      </nav>
+      <div class="auth-buttons">
+        <button class="btn-login">登录</button>
+        <button class="btn-register">注册</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>探索学术前沿，连接科研社群</h1>
+    <p>发现最新论文，追踪科研动态，与全球学者交流</p>
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" placeholder="搜索论文标题、作者或关键词...">
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-value">50K+</div><div class="stat-label">收录论文</div></div>
+      <div class="stat"><div class="stat-value">10K+</div><div class="stat-label">活跃用户</div></div>
+      <div class="stat"><div class="stat-value">100+</div><div class="stat-label">合作期刊</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">最新论文</h2>
+      <a href="#" class="section-link">查看全部 →</a>
+    </div>
+    <div class="paper-grid">
+      <article class="paper-card">
+        <div class="card-header">
+          <span class="journal-dot dot-nature"></span>
+          <span class="journal-name">Nature</span>
+          <span style="margin-left:auto;font-size:12px;color:#f59e0b">IF: 64.8</span>
+        </div>
+        <h3 class="paper-title">Deep Learning in Biomedical Imaging</h3>
+        <p class="paper-abstract">Deep learning techniques have revolutionized biomedical imaging analysis, enabling breakthroughs in disease detection and diagnosis...</p>
+        <div class="paper-meta">
+          <span class="paper-authors">John Doe, Jane Smith</span>
+          <span class="citation-count">📚 150</span>
+        </div>
+      </article>
+      <article class="paper-card">
+        <div class="card-header">
+          <span class="journal-dot dot-science"></span>
+          <span class="journal-name">Science</span>
+          <span style="margin-left:auto;font-size:12px;color:#f59e0b">IF: 56.9</span>
+        </div>
+        <h3 class="paper-title">CRISPR-Cas9: A New Era in Gene Editing</h3>
+        <p class="paper-abstract">CRISPR-Cas9 has transformed the field of genome editing, offering precise and efficient tools for genetic modification...</p>
+        <div class="paper-meta">
+          <span class="paper-authors">Jennifer Chang, Michael Chen</span>
+          <span class="citation-count">📚 89</span>
+        </div>
+      </article>
+      <article class="paper-card">
+        <div class="card-header">
+          <span class="journal-dot dot-cell"></span>
+          <span class="journal-name">Cell</span>
+          <span style="margin-left:auto;font-size:12px;color:#f59e0b">IF: 66.85</span>
+        </div>
+        <h3 class="paper-title">Machine Learning for Drug Discovery</h3>
+        <p class="paper-abstract">Accelerating drug discovery through novel machine learning approaches that predict drug-target interactions with unprecedented accuracy...</p>
+        <div class="paper-meta">
+          <span class="paper-authors">Emily Watson, David Park</span>
+          <span class="citation-count">📚 230</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" style="background:#f8fafc;border-radius:24px;margin:2rem;">
+    <div class="section-header">
+      <h2 class="section-title">热门推荐</h2>
+    </div>
+    <div class="paper-grid">
+      <article class="paper-card" style="grid-column: span 2;display:flex;gap:24px;">
+        <div style="flex:1;">
+          <div class="card-header">
+            <span class="journal-dot dot-nature"></span>
+            <span class="journal-name">Nature</span>
+          </div>
+          <h3 class="paper-title" style="font-size:20px;">Quantum Computing for Protein Folding: Breaking New Ground in Structural Biology</h3>
+          <p class="paper-abstract">Using quantum algorithms to predict protein structures with remarkable precision, opening new frontiers in computational biology...</p>
+          <div class="paper-meta">
+            <span class="paper-authors">Robert Smith, Alice Brown</span>
+            <span class="citation-count">📚 95</span>
+          </div>
+        </div>
+        <div style="width:200px;height:160px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:16px;display:flex;align-items:center;justify-content:center;color:white;font-size:48px;">🔬</div>
+      </article>
+      <article class="paper-card">
+        <div class="card-header">
+          <span class="journal-dot dot-science"></span>
+          <span class="journal-name">Science</span>
+        </div>
+        <h3 class="paper-title">AI-Powered Climate Modeling</h3>
+        <p class="paper-abstract">Advanced AI models are transforming climate prediction accuracy...</p>
+        <div class="paper-meta">
+          <span class="paper-authors">Sarah Johnson</span>
+          <span class="citation-count">📚 178</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div>
+        <div class="footer-brand">TurboCholar</div>
+        <p style="color:#94a3b8;font-size:14px;margin-top:1rem;">连接全球科研社群，推动学术进步</p>
+      </div>
+      <div>
+        <ul class="footer-links">
+          <li><a href="#">关于我们</a></li>
+          <li><a href="#">使用指南</a></li>
+          <li><a href="#">API 文档</a></li>
+        </ul>
+      </div>
+      <div>
+        <ul class="footer-links">
+          <li><a href="#">帮助中心</a></li>
+          <li><a href="#">隐私政策</a></li>
+          <li><a href="#">服务条款</a></li>
+        </ul>
+      </div>
+      <div>
+        <ul class="footer-links">
+          <li><a href="#">联系我们</a></li>
+          <li><a href="#">加入我们</a></li>
+          <li><a href="#">合作伙伴</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2024 TurboCholar. All rights reserved.</div>
+  </footer>
+</body>
+</html>

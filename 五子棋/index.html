@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>现代五子棋</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>现代五子棋</h1>
+        <div class="game-info">
+            <div class="score">
+                <p>玩家胜: <span id="playerWins">0</span></p>
+                <p>电脑胜: <span id="computerWins">0</span></p>
+                <p>平局: <span id="draws">0</span></p>
+            </div>
+            <div class="controls">
+                <button id="startGame">开始游戏</button>
+                <button id="hintBtn">提示</button>
+                <select id="modeSelect">
+                    <option value="pvp">双人对战</option>
+                    <option value="pvc">人机对战</option>
+                </select>
+            </div>
+        </div>
+        <div class="board" id="board"></div>
+        <div class="status" id="status">请选择模式并开始游戏</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
