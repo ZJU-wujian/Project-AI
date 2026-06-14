@@ -1,18 +1,74 @@
 from datetime import datetime, date
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Dict
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 from app.models.paper import Paper
 from app.models.journal import Journal
 from app.models.interaction import UserInteraction, ReadHistory
-from app.schemas.paper import PaperCreate, PaperUpdate
+from app.schemas.paper import PaperCreate, PaperUpdate, JournalCreate
 from app.utils.embedding_utils import embedding_service
 
 
-def get_journals(db: Session, active_only: bool = True) -> List[Journal]:
-    query = db.query(Journal)
+def get_journals(db: Session, active_only: bool = True) -> List[Tuple[Journal, int]]:
+    """返回期刊及每本期刊的论文数量"""
+    query = db.query(
+        Journal,
+        func.count(Paper.id).label("paper_count")
+    ).outerjoin(Paper, Paper.journal_id == Journal.id)
     if active_only:
         query = query.filter(Journal.is_active == True)
+    query = query.group_by(Journal.id).order_by(Journal.impact_factor.desc())
     return query.all()
+
+
+def get_journal_by_id(db: Session, journal_id: int) -> Optional[Journal]:
+    return db.query(Journal).filter(Journal.id == journal_id).first()
+
+
+def get_journal_by_name(db: Session, name: str) -> Optional[Journal]:
+    return db.query(Journal).filter(Journal.name == name).first()
+
+
+def create_journal(db: Session, data: JournalCreate) -> Journal:
+    """新增期刊"""
+    existing = db.query(Journal).filter(Journal.name == data.name).first()
+    if existing:
+        return existing
+    journal = Journal(
+        name=data.name,
+        publisher=data.publisher,
+        impact_factor=data.impact_factor,
+        cover_url=data.cover_url,
+        issn=data.issn,
+        crossref_filter=data.crossref_filter or f"container-title:{data.name}",
+        is_active=True,
+    )
+    db.add(journal)
+    db.commit()
+    db.refresh(journal)
+    return journal
+
+
+def update_journal(db: Session, journal_id: int, data: JournalCreate) -> Optional[Journal]:
+    journal = db.query(Journal).filter(Journal.id == journal_id).first()
+    if not journal:
+        return None
+    for key, value in data.dict(exclude_unset=True).items():
+        if value is not None:
+            setattr(journal, key, value)
+    db.commit()
+    db.refresh(journal)
+    return journal
+
+
+def set_journal_active(db: Session, journal_id: int, active: bool) -> Optional[Journal]:
+    journal = db.query(Journal).filter(Journal.id == journal_id).first()
+    if not journal:
+        return None
+    journal.is_active = active
+    db.commit()
+    db.refresh(journal)
+    return journal
 
 
 def get_or_create_journal(db: Session, name: str, publisher: str = None, impact_factor: float = None) -> Journal:

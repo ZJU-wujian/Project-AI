@@ -8,6 +8,8 @@ class JournalCreate(BaseModel):
     publisher: Optional[str] = None
     impact_factor: Optional[float] = None
     cover_url: Optional[str] = None
+    issn: Optional[str] = None
+    crossref_filter: Optional[str] = None
 
 
 class JournalResponse(BaseModel):
@@ -16,7 +18,10 @@ class JournalResponse(BaseModel):
     publisher: Optional[str] = None
     impact_factor: Optional[float] = None
     cover_url: Optional[str] = None
+    issn: Optional[str] = None
+    crossref_filter: Optional[str] = None
     is_active: bool = True
+    paper_count: Optional[int] = 0
 
     class Config:
         from_attributes = True

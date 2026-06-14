@@ -3,7 +3,7 @@
 
 set -e
 
-echo "📊 TurboCholar 项目初始化..."
+echo "📊 TopScholar 项目初始化..."
 
 # 检查 Python 环境
 if ! command -v python3 &> /dev/null; then
@@ -15,27 +15,27 @@ echo "✅ Python 环境检查通过"
 
 # 创建目录
 echo "📁 创建项目目录..."
-mkdir -p "turbocholar/backend/app/static"
-mkdir -p "turbocholar/backend/uploads"
-mkdir -p "turbocholar/backend/migrations/versions"
+mkdir -p "TopScholar/backend/app/static"
+mkdir -p "TopScholar/backend/uploads"
+mkdir -p "TopScholar/backend/migrations/versions"
 echo "✅ 目录创建完成"
 
 # 创建空的 Python 文件
 echo "🐍 创建 Python 初始化文件..."
-touch turbocholar/backend/app/__init__.py
-touch turbocholar/backend/app/models/__init__.py
-touch turbocholar/backend/app/schemas/__init__.py
-touch turbocholar/backend/app/routers/__init__.py
-touch turbocholar/backend/app/services/__init__.py
-touch turbocholar/backend/app/crawlers/__init__.py
-touch turbocholar/backend/app/tasks/__init__.py
-touch turbocholar/backend/app/utils/__init__.py
-touch turbocholar/backend/app/main.py
+touch TopScholar/backend/app/__init__.py
+touch TopScholar/backend/app/models/__init__.py
+touch TopScholar/backend/app/schemas/__init__.py
+touch TopScholar/backend/app/routers/__init__.py
+touch TopScholar/backend/app/services/__init__.py
+touch TopScholar/backend/app/crawlers/__init__.py
+touch TopScholar/backend/app/tasks/__init__.py
+touch TopScholar/backend/app/utils/__init__.py
+touch TopScholar/backend/app/main.py
 echo "✅ Python 文件初始化完成"
 
 # 创建数据库配置文件
 echo "💾 创建数据库配置..."
-cat > turbocholar/backend/app/database.py << 'EOF'
+cat > TopScholar/backend/app/database.py << 'EOF'
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 from app.config import settings
@@ -62,19 +62,19 @@ EOF
 echo "✅ 数据库配置完成"
 
 # 创建配置文件
-cat > turbocholar/backend/app/config.py << 'EOF'
+cat > TopScholar/backend/app/config.py << 'EOF'
 import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 class Settings:
-    APP_NAME: str = "TurboCholar"
+    APP_NAME: str = "TopScholar"
     API_PREFIX: str = "/api"
     
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL",
-        f"sqlite:///{BASE_DIR / 'turbocholar.db'}"
+        f"sqlite:///{BASE_DIR / 'TopScholar.db'}"
     )
     
     SECRET_KEY: str = os.getenv("SECRET_KEY", "dev-secret-key-change-in-production")
@@ -97,8 +97,8 @@ echo ""
 echo "🎉 项目初始化完成！"
 echo ""
 echo "📚 接下来的步骤："
-echo "1. 安装依赖: pip3 install -r turbocholar/backend/requirements.txt"
-echo "2. 初始化数据库: python3 turbocholar/backend/scripts/init_db.py"
+echo "1. 安装依赖: pip3 install -r TopScholar/backend/requirements.txt"
+echo "2. 初始化数据库: python3 TopScholar/backend/scripts/init_db.py"
 echo "3. 运行服务器: uvicorn app.main:app --reload"
 echo ""
 echo "🌐 查看 API 文档: http://localhost:8000/docs"

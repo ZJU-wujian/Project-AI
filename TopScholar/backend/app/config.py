@@ -4,12 +4,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 class Settings:
-    APP_NAME: str = "TurboCholar"
+    APP_NAME: str = "TopScholar"
     API_PREFIX: str = "/api"
     
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL",
-        f"sqlite:///{BASE_DIR / 'turbocholar.db'}"
+        f"sqlite:///{BASE_DIR / 'TopScholar.db'}"
     )
     
     SECRET_KEY: str = os.getenv("SECRET_KEY", "dev-secret-key-change-in-production")

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Body
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from app.database import get_db
@@ -6,10 +6,11 @@ from app.models.user import User
 from app.models.journal import Journal
 from app.models.paper import Paper
 from app.models.post import Post
-from app.schemas.paper import JournalResponse, PaperResponse, PaperListResponse, PaperSearchRequest
+from app.schemas.paper import JournalCreate, JournalResponse, PaperResponse, PaperListResponse, PaperSearchRequest
 from app.schemas.social import PostResponse, UserListResponse
 from app.services.paper_service import (
-    get_journals, get_or_create_journal, get_papers, get_paper_by_id,
+    get_journals, get_journal_by_id, create_journal, update_journal, set_journal_active,
+    get_or_create_journal, get_papers, get_paper_by_id,
     search_papers, record_user_interaction, record_read_history, get_trending_papers
 )
 from app.services.auth_service import get_current_user_from_token
@@ -19,6 +20,57 @@ from app.utils.jwt_handler import get_token_from_header, verify_access_token
 from app.utils.embedding_utils import embedding_service
 
 router = APIRouter(prefix="/papers", tags=["Papers"])
+
+
+# ── 期刊管理 ──
+
+@router.get("/journals", response_model=List[JournalResponse])
+def get_journals_list(
+    active_only: bool = Query(True, description="只返回活跃期刊"),
+    db: Session = Depends(get_db)
+):
+    result = get_journals(db, active_only=active_only)
+    journals = []
+    for journal, paper_count in result:
+        j = JournalResponse.model_validate(journal)
+        j.paper_count = paper_count
+        journals.append(j)
+    return journals
+
+
+@router.post("/journals", response_model=JournalResponse)
+def create_journal_api(
+    data: JournalCreate,
+    db: Session = Depends(get_db)
+):
+    """新增期刊"""
+    return create_journal(db, data)
+
+
+@router.put("/journals/{journal_id}", response_model=JournalResponse)
+def update_journal_api(
+    journal_id: int,
+    data: JournalCreate,
+    db: Session = Depends(get_db)
+):
+    """更新期刊信息"""
+    journal = update_journal(db, journal_id, data)
+    if not journal:
+        raise HTTPException(status_code=404, detail="Journal not found")
+    return journal
+
+
+@router.post("/journals/{journal_id}/toggle-active", response_model=JournalResponse)
+def toggle_journal_active(
+    journal_id: int,
+    active: bool = Query(True, description="是否启用"),
+    db: Session = Depends(get_db)
+):
+    """启用/停用期刊（不删除，仅标记活跃状态）"""
+    journal = set_journal_active(db, journal_id, active)
+    if not journal:
+        raise HTTPException(status_code=404, detail="Journal not found")
+    return journal
 
 
 def get_current_user(db: Session = Depends(get_db), authorization: str = Depends(get_token_from_header)):

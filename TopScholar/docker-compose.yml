@@ -5,20 +5,20 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: turbocholar-backend
+    container_name: TopScholar-backend
     ports:
       - "8000:8000"
     volumes:
       - ./backend:/app
-      - db_data:/app/turbocholar.db
+      - db_data:/app/TopScholar.db
     environment:
       - SECRET_KEY=change-this-to-a-secure-key-in-production
-      - DATABASE_URL=sqlite:///app/turbocholar.db
+      - DATABASE_URL=sqlite:///app/TopScholar.db
     restart: unless-stopped
 
   frontend:
     image: nginx:alpine
-    container_name: turbocholar-frontend
+    container_name: TopScholar-frontend
     ports:
       - "3001:80"
     volumes:

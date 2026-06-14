@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TurboCholar - 学术社交与论文发现</title>
+  <title>TopScholar - 学术社交与论文发现</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -125,14 +125,15 @@
 <body>
   <header class="header">
     <div class="header-content">
-      <div class="logo" onclick="app.navigate('home')">Turbo<span>Cholar</span></div>
+      <div class="logo" onclick="app.navigate('home')">Top<span>Scholar</span></div>
       <nav class="nav-links">
           <a onclick="app.navigate('home')" class="active">首页</a>
           <a onclick="app.navigate('papers')">论文</a>
           <a onclick="app.navigate('explore')">发现</a>
-          <a onclick="app.navigate('feed')" id="nav-feed" style="display:none">动态</a>
-          <a onclick="app.navigate('friends')" id="nav-friends" style="display:none">好友</a>
-          <a onclick="app.navigate('profile')" id="nav-profile" style="display:none">我的</a>
+          <a onclick="app.navigate('feed')" id="nav-feed">动态</a>
+          <a onclick="app.navigate('friends')" id="nav-friends">好友</a>
+          <a onclick="app.navigate('bookmarks')" id="nav-bookmarks">收藏</a>
+          <a onclick="app.navigate('profile')" id="nav-profile">我的</a>
         </nav>
       <div class="auth-buttons" id="auth-buttons">
         <button class="btn-login" onclick="app.navigate('login')">登录</button>
@@ -279,7 +280,7 @@
     <div id="page-login" class="page">
       <div class="login-page">
         <h2>登录</h2>
-        <div class="form-group"><label>邮箱</label><input type="email" id="login-email"></div>
+        <div class="form-group"><label>邮箱或用户名</label><input type="text" id="login-email"></div>
         <div class="form-group"><label>密码</label><input type="password" id="login-password"></div>
         <button class="btn-submit" onclick="app.handleLogin()">登录</button>
         <div class="form-footer">没有账号？ <a onclick="app.navigate('register')">立即注册</a></div>
@@ -768,16 +769,11 @@
         const authBtns = document.getElementById('auth-buttons');
         const userInfo = document.getElementById('user-info');
         const userName = document.getElementById('user-name');
-        const navProfile = document.getElementById('nav-profile');
-        const navFeed = document.getElementById('nav-feed');
-        const navFriends = document.getElementById('nav-friends');
         if (currentUser) {
           authBtns.style.display = 'none'; userInfo.style.display = 'flex';
           userName.textContent = currentUser.username;
-          navProfile.style.display = 'inline'; navFeed.style.display = 'inline'; navFriends.style.display = 'inline';
         } else {
           authBtns.style.display = 'flex'; userInfo.style.display = 'none';
-          navProfile.style.display = 'none'; navFeed.style.display = 'none'; navFriends.style.display = 'none';
         }
       }
     };

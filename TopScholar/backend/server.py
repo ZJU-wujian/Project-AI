@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-TurboCholar 后端服务器
+TopScholar 后端服务器
 """
 import sys
 import os
@@ -12,7 +12,7 @@ from app.main import app
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="TurboCholar Backend Server")
+    parser = argparse.ArgumentParser(description="TopScholar Backend Server")
     parser.add_argument("--host", default="0.0.0.0", help="Host to bind to")
     parser.add_argument("--port", type=int, default=8000, help="Port to listen on")
     parser.add_argument("--init-db", action="store_true", help="Initialize database")
@@ -21,7 +21,7 @@ def main():
     args = parser.parse_args()
     
     import uvicorn
-    print(f"🚀 Starting TurboCholar API on {args.host}:{args.port}")
+    print(f"🚀 Starting TopScholar API on {args.host}:{args.port}")
     print(f"📚 API Docs: http://localhost:{args.port}/docs")
     uvicorn.run(
         "app.main:app",

@@ -9,7 +9,7 @@ from app.database import engine, Base
 
 app = FastAPI(
     title=settings.APP_NAME,
-    description="TurboCholar - 学术社交与论文发现平台",
+    description="TopScholar - 学术社交与论文发现平台",
     version="0.1.0",
     docs_url="/docs",
     redoc_url="/redoc"
@@ -26,7 +26,7 @@ app.add_middleware(
 
 @app.get("/", response_class=PlainTextResponse)
 async def root():
-    return "TurboCholar API\nDocs: /docs\nAPI Prefix: /api"
+    return "TopScholar API\nDocs: /docs\nAPI Prefix: /api"
 
 
 @app.get("/health")

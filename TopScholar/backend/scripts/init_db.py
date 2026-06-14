@@ -36,7 +36,7 @@ def reset_database():
 
 if __name__ == "__main__":
     import argparse
-    parser = argparse.ArgumentParser(description="TurboCholar Database Initializer")
+    parser = argparse.ArgumentParser(description="TopScholar Database Initializer")
     parser.add_argument("--reset", action="store_true", help="Reset database")
     
     args = parser.parse_args()

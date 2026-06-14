@@ -40,8 +40,10 @@ def register_user(db: Session, req: RegisterRequest) -> User:
     return user
 
 
-def login_user(db: Session, email: str, password: str) -> dict:
-    user = db.query(User).filter(User.email == email).first()
+def login_user(db: Session, email_or_username: str, password: str) -> dict:
+    user = db.query(User).filter(
+        (User.email == email_or_username) | (User.username == email_or_username)
+    ).first()
     if not user or not verify_password(password, user.password_hash):
         raise ValueError("Invalid email or password")
     token = create_access_token({"sub": str(user.id)})

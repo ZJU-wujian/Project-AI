@@ -1,4 +1,4 @@
-# TurboCholar - 学术社交与论文发现平台
+# TopScholar - 学术社交与论文发现平台
 
 ## 📋 项目状态
 
@@ -17,27 +17,27 @@
 python3 --version  # 需要 Python 3.9+
 
 # 安装依赖
-pip3 install -r turbocholar/backend/requirements.txt
+pip3 install -r TopScholar/backend/requirements.txt
 ```
 
 ### 初始化数据库
 
 ```bash
 # 初始化数据库
-python3 turbocholar/backend/scripts/init_db.py
+python3 TopScholar/backend/scripts/init_db.py
 
 # 填充示例数据
-python3 turbocholar/backend/scripts/populate_data.py
+python3 TopScholar/backend/scripts/populate_data.py
 ```
 
 ### 启动服务器
 
 ```bash
 # 启动开发服务器
-python3 turbocholar/backend/server.py --reload
+python3 TopScholar/backend/server.py --reload
 
 # 或直接使用 uvicorn
-uvicorn turbocholar.backend.app.main:app --reload
+uvicorn TopScholar.backend.app.main:app --reload
 ```
 
 ### 访问 API
@@ -55,7 +55,7 @@ uvicorn turbocholar.backend.app.main:app --reload
 ## 📦 项目结构
 
 ```
-turbocholar/
+TopScholar/
 ├── backend/
 │   ├── app/
 │   │   ├── __init__.py
@@ -160,10 +160,10 @@ turbocholar/
 
 ```bash
 # 初始化项目
-./turbocholar/init.sh
+./TopScholar/init.sh
 
 # 运行服务器
-cd turbocholar/backend
+cd TopScholar/backend
 python3 server.py --reload
 
 # 运行爬虫
@@ -193,4 +193,4 @@ MIT License
 
 ---
 
-**TurboCholar** - 让学术发现更简单！
+**TopScholar** - 让学术发现更简单！
