@@ -1,0 +1,92 @@
+<!-- pages/paper/paper.wxml - 论文详情页 -->
+<view class="container">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container" style="padding-top: 100rpx;">
+    <view class="skeleton" style="height: 60rpx; width: 80%; margin-bottom: 24rpx;"></view>
+    <view class="skeleton" style="height: 30rpx; width: 60%; margin-bottom: 20rpx;"></view>
+    <view class="skeleton" style="height: 300rpx; margin-top: 40rpx;"></view>
+  </view>
+
+  <!-- 论文内容 -->
+  <view wx:else>
+    <!-- 期刊标签 -->
+    <view class="paper-header">
+      <view class="journal-tag" style="background: {{journalColor}};">
+        {{paper.journal ? paper.journal.name : '未分类'}}
+      </view>
+      <view wx:if="{{paper.volume}}" class="vol-tag">Vol {{paper.volume}}{{paper.issue ? ' · Issue ' + paper.issue : ''}}</view>
+    </view>
+
+    <!-- 标题 -->
+    <view class="paper-title">{{paper.title}}</view>
+
+    <!-- 作者 -->
+    <view wx:if="{{paper.authors}}" class="paper-authors">{{paper.authors}}</view>
+
+    <!-- 发布日期 -->
+    <view class="paper-date">{{date_display}}</view>
+
+    <!-- 引用数等信息 -->
+    <view class="paper-meta-row">
+      <view class="meta-pill">📄 {{paper.citation_count || 0}} 次引用</view>
+      <view class="meta-pill">📊 {{paper.journal ? (paper.journal.impact_factor || '-') : '-'}} IF</view>
+    </view>
+
+    <view class="divider"></view>
+
+    <!-- 摘要 -->
+    <view class="paper-section">
+      <view class="section-label">摘要</view>
+      <view class="paper-abstract">{{paper.abstract || '暂无摘要'}}</view>
+    </view>
+
+    <!-- 关键词 -->
+    <view wx:if="{{paper.keywords}}" class="paper-section">
+      <view class="section-label">关键词</view>
+      <view class="keyword-list">
+        <view wx:for="{{keywordList}}" wx:key="*this" class="keyword-item">{{item}}</view>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+
+    <!-- 相似论文 -->
+    <view class="paper-section">
+      <view class="section-label">相关论文</view>
+      <view wx:if="{{similarLoading}}" class="loading-text" style="padding: 40rpx 0; text-align: center; color: #94a3b8; font-size: 26rpx;">
+        加载中...
+      </view>
+      <view wx:elif="{{similarPapers.length > 0}}">
+        <view 
+          wx:for="{{similarPapers}}" 
+          wx:key="id" 
+          class="similar-card"
+          bindtap="goToSimilar"
+          data-id="{{item.id}}"
+        >
+          <view class="similar-header">
+            <view class="journal-dot" style="background: {{item.color}};"></view>
+            <view class="journal-label">{{item.journal_name}}</view>
+          </view>
+          <view class="similar-title">{{item.title}}</view>
+          <view class="similar-meta">{{item.date_display}} · {{item.citation_count || 0}} 引用</view>
+        </view>
+      </view>
+      <view wx:else class="empty-text" style="text-align: center; padding: 40rpx 0; color: #94a3b8; font-size: 26rpx;">
+        暂无相关论文
+      </view>
+    </view>
+
+    <!-- DOI / 外部链接 -->
+    <view wx:if="{{paper.doi}}" class="paper-section">
+      <view class="section-label">DOI</view>
+      <view class="paper-doi" selectable="true">{{paper.doi}}</view>
+    </view>
+
+    <!-- 底部操作区 -->
+    <view class="bottom-actions safe-area-bottom">
+      <button class="btn btn-outline" bindtap="copyCitation">复制引用</button>
+      <button class="btn btn-primary" bindtap="sharePaper">分享</button>
+    </view>
+  </view>
+</view>

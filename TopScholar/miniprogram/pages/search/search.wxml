@@ -1,0 +1,77 @@
+<!-- pages/search/search.wxml - 搜索页 -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <view class="page-title">搜索</view>
+    <view wx:if="{{journalName}}" class="page-subtitle">期刊: {{journalName}}</view>
+    <view wx:else class="page-subtitle">搜索感兴趣的学术论文</view>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-box search-box-focused">
+    <text class="search-icon">🔍</text>
+    <input 
+      type="text"
+      placeholder="输入关键词..."
+      value="{{keyword}}"
+      bindinput="onInput"
+      bindconfirm="onSearch"
+      confirm-type="search"
+      focus="{{autoFocus}}"
+    />
+    <view wx:if="{{keyword}}" class="clear-btn" bindtap="clearKeyword">✕</view>
+  </view>
+
+  <!-- 搜索历史 -->
+  <view wx:if="{{!keyword && history.length > 0 && !searched}}" class="history-section">
+    <view class="section-header">
+      <text class="section-title">搜索历史</text>
+      <text class="section-action" bindtap="clearHistory">清空</text>
+    </view>
+    <view class="history-tags">
+      <view wx:for="{{history}}" wx:key="*this" class="history-tag" bindtap="searchFromHistory" data-keyword="{{item}}">
+        {{item}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading-text">搜索中...</view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view wx:elif="{{searched && !loading}}">
+    <!-- 有结果 -->
+    <view wx:if="{{papers.length > 0}}">
+      <view class="result-count">共找到 {{total}} 篇论文</view>
+      <view wx:for="{{papers}}" wx:key="id" class="paper-card" bindtap="goToPaper" data-id="{{item.id}}">
+        <view class="paper-card-header">
+          <view class="journal-dot" style="background: {{item.color}};"></view>
+          <view class="journal-label">{{item.journal_name || '未分类'}}</view>
+        </view>
+        <view class="paper-card-title">{{item.title}}</view>
+        <view wx:if="{{item.abstract}}" class="paper-card-abstract">{{item.abstract}}</view>
+        <view wx:if="{{item.authors}}" class="paper-card-authors">{{item.authors}}</view>
+        <view class="paper-card-footer">
+          <view class="paper-card-date">{{item.date_display}}</view>
+          <view class="meta-item">📄 {{item.citation_count || 0}} 引用</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 无结果 -->
+    <view wx:else class="empty-state">
+      <view class="empty-icon">🔍</view>
+      <view class="empty-text">未找到相关论文</view>
+      <view class="empty-subtext">试试其他关键词</view>
+    </view>
+  </view>
+
+  <!-- 初始状态 - 提示用户搜索 -->
+  <view wx:elif="{{!searched && history.length === 0}}" class="empty-state">
+    <view class="empty-icon">📝</view>
+    <view class="empty-text">输入关键词开始搜索</view>
+    <view class="empty-subtext">支持搜索标题、作者、关键词</view>
+  </view>
+</view>

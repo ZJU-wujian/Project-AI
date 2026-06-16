@@ -1,0 +1,176 @@
+/* pages/profile/profile.wxss - 个人中心样式 */
+
+.profile-card {
+  background: linear-gradient(135deg, #0f172a 0%, #3b82f6 100%);
+  color: white;
+  border-radius: 24rpx;
+  padding: 48rpx 32rpx;
+  margin-bottom: 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-initial {
+  font-size: 56rpx;
+  font-weight: 700;
+  color: white;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.username {
+  font-size: 36rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.user-email {
+  font-size: 24rpx;
+  opacity: 0.8;
+  margin-bottom: 4rpx;
+}
+
+.user-status {
+  font-size: 24rpx;
+  opacity: 0.8;
+}
+
+.login-btn-group {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 32rpx;
+}
+
+.login-btn-group .btn {
+  flex: 1;
+  padding: 24rpx 0;
+  font-size: 28rpx;
+  border-radius: 16rpx;
+}
+
+/* 登录表单 */
+.form-card {
+  background: white;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(15, 23, 42, 0.05);
+}
+
+.form-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 32rpx;
+  text-align: center;
+}
+
+.form-item {
+  margin-bottom: 24rpx;
+}
+
+.form-label {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 12rpx;
+}
+
+.form-input {
+  background: #f1f5f9;
+  border: 2rpx solid #e2e8f0;
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  border-color: #3b82f6;
+  background: white;
+}
+
+.form-switch {
+  text-align: center;
+  font-size: 26rpx;
+  color: #3b82f6;
+  margin-top: 20rpx;
+  padding: 16rpx 0;
+}
+
+.form-cancel {
+  text-align: center;
+  font-size: 26rpx;
+  color: #94a3b8;
+  padding: 16rpx 0;
+  margin-top: 8rpx;
+}
+
+/* 菜单 */
+.menu-section {
+  background: white;
+  border-radius: 20rpx;
+  margin-bottom: 24rpx;
+  overflow: hidden;
+}
+
+.menu-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #64748b;
+  padding: 24rpx 32rpx 16rpx;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 32rpx;
+  gap: 16rpx;
+  border-top: 1rpx solid #f1f5f9;
+  transition: background 0.15s;
+}
+
+.menu-item:first-of-type {
+  border-top: none;
+}
+
+.menu-item:active {
+  background: #f8fafc;
+}
+
+.menu-icon {
+  font-size: 36rpx;
+}
+
+.menu-text {
+  flex: 1;
+  font-size: 28rpx;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.menu-arrow {
+  font-size: 36rpx;
+  color: #cbd5e1;
+}
+
+.version-info {
+  text-align: center;
+  font-size: 24rpx;
+  color: #94a3b8;
+  padding: 48rpx 0 32rpx;
+}

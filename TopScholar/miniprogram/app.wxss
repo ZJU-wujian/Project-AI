@@ -1,0 +1,407 @@
+/* app.wxss - TopScholar 微信小程序全局样式 */
+
+page {
+  background-color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  font-size: 28rpx;
+  color: #0f172a;
+  line-height: 1.5;
+}
+
+/* 通用容器 */
+.container {
+  min-height: 100vh;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+/* 页面标题区 */
+.page-header {
+  padding: 32rpx 0 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.page-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -1rpx;
+  margin-bottom: 8rpx;
+}
+
+.page-subtitle {
+  font-size: 26rpx;
+  color: #64748b;
+}
+
+/* 卡片样式 */
+.card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 2rpx 12rpx rgba(15, 23, 42, 0.04);
+  margin-bottom: 24rpx;
+}
+
+/* 论文卡片 */
+.paper-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(15, 23, 42, 0.04);
+  border: 1rpx solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.paper-card:active {
+  transform: scale(0.98);
+  background: #f8fafc;
+}
+
+.paper-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.journal-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+
+.journal-label {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.paper-card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.4;
+  margin-bottom: 12rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.paper-card-abstract {
+  font-size: 26rpx;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.paper-card-authors {
+  font-size: 24rpx;
+  color: #94a3b8;
+  margin-bottom: 16rpx;
+}
+
+.paper-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f1f5f9;
+}
+
+.paper-card-date {
+  font-size: 24rpx;
+  color: #94a3b8;
+}
+
+.paper-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  font-size: 24rpx;
+  color: #94a3b8;
+}
+
+/* 期刊卡片 */
+.journal-card {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(15, 23, 42, 0.04);
+  border: 1rpx solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.journal-card:active {
+  transform: scale(0.98);
+}
+
+.journal-cover {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  padding: 16rpx;
+  box-sizing: border-box;
+}
+
+.journal-cover-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 12rpx;
+}
+
+.journal-cover-placeholder {
+  font-size: 28rpx;
+  line-height: 1.3;
+  word-break: break-all;
+}
+
+.journal-info {
+  padding: 16rpx 8rpx 0;
+}
+
+.journal-name {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 8rpx;
+}
+
+.journal-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: #64748b;
+}
+
+/* 按钮样式 */
+.btn {
+  padding: 20rpx 40rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.btn-primary:active {
+  opacity: 0.85;
+}
+
+.btn-secondary {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2rpx solid #e2e8f0;
+  color: #475569;
+}
+
+/* 标签样式 */
+.tag {
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.tag-blue {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.tag-green {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.tag-gray {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+}
+
+.loading-text {
+  font-size: 26rpx;
+  color: #64748b;
+  margin-top: 20rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  opacity: 0.3;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #94a3b8;
+  margin-bottom: 12rpx;
+}
+
+.empty-subtext {
+  font-size: 24rpx;
+  color: #cbd5e1;
+}
+
+/* 搜索框 */
+.search-box {
+  background: #f1f5f9;
+  border-radius: 20rpx;
+  padding: 20rpx 28rpx;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.search-box input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #0f172a;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.search-icon {
+  margin-right: 12rpx;
+  font-size: 28rpx;
+  color: #94a3b8;
+}
+
+/* 分段切换 */
+.segment-control {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 16rpx;
+  padding: 6rpx;
+  margin-bottom: 24rpx;
+}
+
+.segment-item {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  font-size: 26rpx;
+  color: #64748b;
+  font-weight: 500;
+  border-radius: 12rpx;
+  transition: all 0.2s ease;
+}
+
+.segment-item.active {
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 600;
+  box-shadow: 0 2rpx 8rpx rgba(15, 23, 42, 0.08);
+}
+
+/* 引用数图标 */
+.citation-count {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  font-size: 24rpx;
+  color: #94a3b8;
+}
+
+/* 分隔线 */
+.divider {
+  height: 1rpx;
+  background: #e2e8f0;
+  margin: 24rpx 0;
+}
+
+/* 安全区适配 */
+.safe-area-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 骨架屏 */
+.skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8rpx;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* 响应式文本截断 */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}

@@ -1,0 +1,88 @@
+<!-- pages/profile/profile.wxml - 个人中心 -->
+<view class="container">
+  <!-- 用户信息区 -->
+  <view class="profile-card">
+    <view class="avatar">
+      <text wx:if="{{!userInfo}}" class="avatar-initial">{{avatarLetter}}</text>
+      <text wx:else class="avatar-initial">{{userInfoInitial}}</text>
+    </view>
+    <view class="user-info">
+      <view class="username">{{userInfo.username || '访客用户'}}</view>
+      <view class="user-email" wx:if="{{loggedIn}}">{{userInfo.email || ''}}</view>
+      <view class="user-status" wx:if="{{!loggedIn}}">点击登录以保存你的收藏</view>
+    </view>
+  </view>
+
+  <!-- 登录/登出按钮 -->
+  <view wx:if="{{!loggedIn}}" class="login-btn-group">
+    <button class="btn btn-primary" bindtap="showLogin">登录</button>
+    <button class="btn btn-outline" bindtap="showRegister">注册</button>
+  </view>
+  <view wx:else class="login-btn-group">
+    <button class="btn btn-outline" bindtap="logout">退出登录</button>
+  </view>
+
+  <!-- 登录表单 -->
+  <view wx:if="{{showLoginForm}}" class="form-card">
+    <view class="form-title">{{loginMode === 'login' ? '登录' : '注册'}}</view>
+    
+    <view wx:if="{{loginMode === 'register'}}" class="form-item">
+      <view class="form-label">用户名</view>
+      <input class="form-input" placeholder="请输入用户名" value="{{formData.username}}" bindinput="onInputUsername" />
+    </view>
+    
+    <view class="form-item">
+      <view class="form-label">邮箱</view>
+      <input class="form-input" type="text" placeholder="请输入邮箱" value="{{formData.email}}" bindinput="onInputEmail" />
+    </view>
+    
+    <view class="form-item">
+      <view class="form-label">密码</view>
+      <input class="form-input" password placeholder="请输入密码" value="{{formData.password}}" bindinput="onInputPassword" />
+    </view>
+    
+    <button class="btn btn-primary" bindtap="submitAuth" loading="{{formLoading}}">
+      {{loginMode === 'login' ? '登录' : '注册'}}
+    </button>
+    
+    <view class="form-switch" bindtap="switchMode">
+      {{loginMode === 'login' ? '没有账号？去注册' : '已有账号？去登录'}}
+    </view>
+    
+    <view class="form-cancel" bindtap="hideLoginForm">取消</view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-title">我的收藏</view>
+    <view class="menu-item" bindtap="goToFavorites">
+      <text class="menu-icon">⭐</text>
+      <text class="menu-text">收藏的论文</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToMyJournals">
+      <text class="menu-icon">📖</text>
+      <text class="menu-text">订阅的期刊</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 设置菜单 -->
+  <view class="menu-section">
+    <view class="menu-title">其他</view>
+    <view class="menu-item" bindtap="showAbout">
+      <text class="menu-icon">ℹ️</text>
+      <text class="menu-text">关于 TopScholar</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="shareApp">
+      <text class="menu-icon">📱</text>
+      <text class="menu-text">分享给朋友</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    TopScholar v1.0.0</view>
+</view>

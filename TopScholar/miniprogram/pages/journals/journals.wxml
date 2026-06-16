@@ -1,0 +1,50 @@
+<!-- pages/journals/journals.wxml - 期刊库 -->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <view class="page-title">期刊库</view>
+    <view class="page-subtitle">订阅你感兴趣的期刊</view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading-text">加载中...</view>
+  </view>
+
+  <!-- 期刊网格 -->
+  <view wx:elif="{{journals.length > 0}}" class="journal-grid">
+    <view 
+      wx:for="{{journals}}" 
+      wx:key="id" 
+      class="journal-card"
+      bindtap="selectJournal"
+      data-id="{{item.id}}"
+      data-name="{{item.name}}"
+    >
+      <view class="journal-cover" style="background: linear-gradient(135deg, {{item.color}} 0%, {{item.color_dark}} 100%);">
+        <image 
+          wx:if="{{item.cover_image}}"
+          src="{{item.cover_image}}"
+          mode="aspectFill"
+          class="journal-cover-image"
+        />
+        <view wx:else class="journal-cover-placeholder">{{item.short_name}}</view>
+      </view>
+      <view class="journal-info">
+        <view class="journal-name">{{item.name}}</view>
+        <view class="journal-stats">
+          <view class="journal-if">IF {{item.impact_factor || '-'}}</view>
+          <view class="journal-count">{{item.paper_count || 0}} 篇</view>
+        </view>
+        <view wx:if="{{item.volume}}" class="journal-vol">Vol {{item.volume}} · {{item.issue || '最新'}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:else class="empty-state">
+    <view class="empty-icon">📖</view>
+    <view class="empty-text">暂无期刊</view>
+    <view class="empty-subtext">稍后再来看看吧</view>
+  </view>
+</view>
