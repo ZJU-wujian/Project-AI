@@ -260,3 +260,56 @@ def get_paper_posts(
     if not paper:
         raise HTTPException(status_code=404, detail="Paper not found")
     return get_similar_posts(db, paper_id)
+
+
+# ── 用户期刊库 ──
+
+from app.models.user_journal import UserJournal
+
+
+@router.get("/journals/user/mine")
+def get_user_journals(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """获取当前用户订阅的期刊列表"""
+    from sqlalchemy import and_
+    subscriptions = db.query(UserJournal).filter(
+        and_(UserJournal.user_id == current_user.id, UserJournal.is_active == True)
+    ).all()
+    journal_ids = [s.journal_id for s in subscriptions]
+    if not journal_ids:
+        return []
+    journals = db.query(Journal).filter(Journal.id.in_(journal_ids)).all()
+    result = []
+    for j in journals:
+        j_info = JournalResponse.model_validate(j)
+        paper_count = db.query(Paper).filter(Paper.journal_id == j.id).count()
+        j_info.paper_count = paper_count
+        result.append(j_info)
+    return result
+
+
+@router.post("/journals/user/mine")
+def save_user_journals(
+    journal_ids: List[int] = Body(..., embed=True),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """保存用户的期刊订阅"""
+    user_id_val = current_user.id
+    # 先将当前所有订阅标记为未激活
+    db.query(UserJournal).filter(UserJournal.user_id == user_id_val).update({"is_active": False})
+    db.commit()
+    # 然后为 journal_ids 创建或重新激活订阅
+    for jid in journal_ids:
+        existing = db.query(UserJournal).filter(
+            UserJournal.user_id == user_id_val,
+            UserJournal.journal_id == jid
+        ).first()
+        if existing:
+            existing.is_active = True
+        else:
+            db.add(UserJournal(user_id=user_id_val, journal_id=jid))
+    db.commit()
+    return {"success": True, "count": len(journal_ids)}

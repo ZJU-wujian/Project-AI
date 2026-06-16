@@ -29,12 +29,15 @@ CROSSREF_API = "https://api.crossref.org/works"
 
 
 # 期刊默认配置（首次运行时会自动写入数据库）
+# 卷/期号参考：2026年6月从各期刊官网查证
 DEFAULT_JOURNALS = [
     {
         "name": "Nature",
         "publisher": "Springer Nature",
         "impact_factor": 64.8,
         "issn": "1476-4687",
+        "volume": 654,
+        "issue": 8118,
         "crossref_filter": "container-title:Nature",
         "cover_url": "https://www.nature.com/nature/assets/vor/images/banners/Nature_Logo_2023.png",
     },
@@ -43,6 +46,8 @@ DEFAULT_JOURNALS = [
         "publisher": "AAAS",
         "impact_factor": 56.9,
         "issn": "1095-9203",
+        "volume": 392,
+        "issue": 6801,
         "crossref_filter": "container-title:Science",
         "cover_url": "https://www.science.org/do/10.1126/science.aaw9848/full/science-logo-1200.jpg",
     },
@@ -51,6 +56,8 @@ DEFAULT_JOURNALS = [
         "publisher": "Cell Press",
         "impact_factor": 66.85,
         "issn": "1097-4172",
+        "volume": 189,
+        "issue": 8,
         "crossref_filter": "container-title:Cell",
         "cover_url": "https://www.cell.com/cms/attachment/2145570689/2089218890/cell_cover.jpg",
     },
@@ -59,6 +66,8 @@ DEFAULT_JOURNALS = [
         "publisher": "Springer Nature",
         "impact_factor": 28.0,
         "issn": "1546-1726",
+        "volume": 29,
+        "issue": 5,
         "crossref_filter": "container-title:Nature Neuroscience",
         "cover_url": "https://www.nature.com/natneurosci/assets/vor/images/banners/nnlogo.png",
     },
@@ -67,6 +76,8 @@ DEFAULT_JOURNALS = [
         "publisher": "Springer Nature",
         "impact_factor": 31.1,
         "issn": "1546-1696",
+        "volume": 44,
+        "issue": 5,
         "crossref_filter": "container-title:Nature Biotechnology",
         "cover_url": "https://www.nature.com/nbt/assets/vor/images/banners/nbtlogo.png",
     },
@@ -75,6 +86,8 @@ DEFAULT_JOURNALS = [
         "publisher": "Elsevier",
         "impact_factor": 168.9,
         "issn": "1474-547X",
+        "volume": 407,
+        "issue": 10545,
         "crossref_filter": "container-title:The Lancet",
         "cover_url": "https://www.thelancet.com/cms/asset/c15e3d3a-93b2-4dce-a02d-8606a91ed3c5/lancet-logo-large.jpg",
     },
@@ -92,6 +105,8 @@ def init_default_journals():
                 publisher=conf["publisher"],
                 impact_factor=conf["impact_factor"],
                 issn=conf["issn"],
+                volume=conf.get("volume"),
+                issue=conf.get("issue"),
                 crossref_filter=conf["crossref_filter"],
                 cover_url=conf["cover_url"],
                 is_active=True,
@@ -99,9 +114,12 @@ def init_default_journals():
             db.add(j)
             print(f"✓ 新增期刊: {conf['name']} (IF={conf['impact_factor']})")
         else:
-            # 更新可能缺失的字段
             if not existing.issn:
                 existing.issn = conf["issn"]
+            if not existing.volume and conf.get("volume"):
+                existing.volume = conf["volume"]
+            if not existing.issue and conf.get("issue"):
+                existing.issue = conf["issue"]
             if not existing.crossref_filter:
                 existing.crossref_filter = conf["crossref_filter"]
             if not existing.cover_url:

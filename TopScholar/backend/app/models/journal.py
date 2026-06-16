@@ -14,5 +14,7 @@ class Journal(Base):
     issn = Column(String(20), nullable=True)
     crossref_filter = Column(String(500), nullable=True)
     is_active = Column(Boolean, default=True)
+    volume = Column(Integer, nullable=True)
+    issue = Column(Integer, nullable=True)
 
     papers = relationship("Paper", back_populates="journal")

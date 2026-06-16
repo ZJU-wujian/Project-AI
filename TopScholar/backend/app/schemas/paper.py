@@ -10,6 +10,8 @@ class JournalCreate(BaseModel):
     cover_url: Optional[str] = None
     issn: Optional[str] = None
     crossref_filter: Optional[str] = None
+    volume: Optional[int] = None
+    issue: Optional[int] = None
 
 
 class JournalResponse(BaseModel):
@@ -22,6 +24,8 @@ class JournalResponse(BaseModel):
     crossref_filter: Optional[str] = None
     is_active: bool = True
     paper_count: Optional[int] = 0
+    volume: Optional[int] = None
+    issue: Optional[int] = None
 
     class Config:
         from_attributes = True

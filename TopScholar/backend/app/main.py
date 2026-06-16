@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
 from app.config import settings
-from app.routers import auth, papers, social, sync
+from app.routers import auth, papers, social, sync, translate
 from app.database import engine, Base
 
 
@@ -39,6 +39,7 @@ app.include_router(auth.router, prefix=settings.API_PREFIX)
 app.include_router(papers.router, prefix=settings.API_PREFIX)
 app.include_router(social.router, prefix=settings.API_PREFIX)
 app.include_router(sync.router, prefix=settings.API_PREFIX)
+app.include_router(translate.router, prefix=settings.API_PREFIX)
 
 
 

@@ -120,6 +120,84 @@
     
     .spinner { width: 40px; height: 40px; border: 3px solid #f1f5f9; border-top-color: #0f172a; border-radius: 50%; animation: spin 1s linear infinite; margin: 4rem auto; }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* System Settings */
+    .settings-section { background: white; border: 1px solid #e2e8f0; border-radius: 24px; padding: 32px; margin-top: 24px; }
+    .settings-section h3 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 20px; }
+    .settings-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid #f1f5f9; }
+    .settings-item:last-child { border-bottom: none; }
+    .settings-label { color: #475569; font-size: 15px; font-weight: 500; }
+    .lang-badge { display: inline-block; padding: 6px 14px; background: #f1f5f9; border-radius: 8px; font-size: 13px; color: #475569; margin: 0 6px; }
+    .lang-btn { padding: 10px 20px; background: white; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; color: #475569; cursor: pointer; transition: all 0.2s; margin-left: 8px; }
+    .lang-btn:hover { border-color: #3b82f6; color: #3b82f6; }
+    .lang-btn.active { background: #0f172a; color: white; border-color: #0f172a; }
+    .lang-status { font-size: 13px; color: #94a3b8; margin-left: 12px; }
+
+    /* Journal Library */
+    .journal-section { margin-top: 32px; }
+    .journal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .journal-header h2 { font-size: 20px; font-weight: 700; color: #0f172a; }
+    .journal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+    .journal-card { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px; padding: 16px; position: relative; transition: all 0.2s; cursor: pointer; }
+    .journal-card:hover { border-color: #3b82f6; transform: translateY(-2px); }
+    .journal-card.selected { border-color: #3b82f6; background: #eff6ff; }
+    .journal-cover { width: 100%; aspect-ratio: 3/4; border-radius: 12px; display: flex; align-items: flex-start; justify-content: center; color: white; margin-bottom: 12px; padding: 0; overflow: hidden; position: relative; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.15); background: #1e293b; }
+    .journal-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .journal-cover-top { width: 100%; padding: 10px 12px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.85; font-weight: 600; text-align: center; }
+    .journal-cover-main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; text-align: center; padding: 8px; }
+    .journal-cover-title { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; line-height: 1.2; }
+    .journal-cover-title.small { font-size: 18px; }
+    .journal-cover-bottom { width: 100%; padding: 12px; text-align: center; font-size: 10px; font-weight: 600; letter-spacing: 1px; }
+    .journal-name { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 8px; line-height: 1.3; }
+    .journal-info { display: flex; justify-content: space-between; font-size: 12px; color: #64748b; }
+    .journal-if { color: #f59e0b; font-weight: 700; }
+    .journal-issue { color: #3b82f6; font-weight: 700; }
+    .journal-checkbox { position: absolute; top: 10px; left: 10px; width: 24px; height: 24px; border-radius: 6px; border: 2px solid #cbd5e1; background: white; display: flex; align-items: center; justify-content: center; font-size: 14px; z-index: 10; }
+    .journal-card.selected .journal-checkbox { background: #3b82f6; border-color: #3b82f6; color: white; }
+    .journal-actions { display: flex; gap: 12px; margin-top: 16px; }
+
+    /* Journal Brand Themes */
+    .cover-nature { background: linear-gradient(180deg, #1a3d1a 0%, #0a1a0a 50%, #1a3d1a 100%); box-shadow: inset 0 20px 40px rgba(0,0,0,0.3); }
+    .cover-nature .journal-cover-top { color: #a3e6a3; border-bottom: 2px solid #22c55e; width: 90%; margin: 0 auto; padding-bottom: 8px; }
+    .cover-nature .journal-cover-title { font-family: Georgia, serif; font-style: italic; color: #ffffff; font-size: 28px; }
+    .cover-nature .journal-cover-bottom { color: #22c55e; background: rgba(0,0,0,0.2); }
+
+    .cover-science { background: linear-gradient(180deg, #1e3a5f 0%, #0a1929 100%); box-shadow: inset 0 20px 40px rgba(0,0,0,0.3); }
+    .cover-science .journal-cover-top { color: #93c5fd; font-size: 11px; }
+    .cover-science .journal-cover-title { font-family: Georgia, serif; color: #ffffff; font-size: 26px; }
+    .cover-science .journal-cover-bottom { color: #60a5fa; background: rgba(255,255,255,0.05); }
+
+    .cover-cell { background: linear-gradient(180deg, #042f2e 0%, #020a0a 100%); box-shadow: inset 0 20px 40px rgba(0,0,0,0.3); border: 3px solid #facc15; }
+    .cover-cell .journal-cover-top { color: #fde68a; font-weight: 700; }
+    .cover-cell .journal-cover-title { font-family: Georgia, serif; font-style: italic; color: #facc15; font-size: 26px; }
+    .cover-cell .journal-cover-bottom { color: #facc15; background: rgba(0,0,0,0.3); }
+
+    .cover-lancet { background: linear-gradient(180deg, #fef2f2 0%, #fde4e4 100%); color: #1f2937; border: 4px solid #dc2626; }
+    .cover-lancet .journal-cover-top { color: #dc2626; border-bottom: 2px solid #dc2626; }
+    .cover-lancet .journal-cover-title { color: #1f2937; font-family: Georgia, serif; font-weight: 800; }
+    .cover-lancet .journal-cover-bottom { color: #dc2626; background: rgba(220,38,38,0.1); font-weight: 700; }
+
+    .cover-neuron { background: linear-gradient(135deg, #581c87 0%, #1e1b4b 100%); box-shadow: inset 0 20px 40px rgba(0,0,0,0.3); }
+    .cover-neuron .journal-cover-top { color: #d8b4fe; border-bottom: 2px solid #a855f7; width: 90%; margin: 0 auto; padding-bottom: 8px; }
+    .cover-neuron .journal-cover-title { font-family: Georgia, serif; color: #ffffff; font-size: 20px; }
+    .cover-neuron .journal-cover-bottom { color: #c084fc; background: rgba(168,85,247,0.2); }
+
+    .cover-biotech { background: linear-gradient(135deg, #c2410c 0%, #7c2d12 100%); box-shadow: inset 0 20px 40px rgba(0,0,0,0.3); }
+    .cover-biotech .journal-cover-top { color: #fed7aa; border-bottom: 2px solid #fb923c; width: 90%; margin: 0 auto; padding-bottom: 8px; }
+    .cover-biotech .journal-cover-title { font-family: Georgia, serif; color: #ffffff; font-size: 18px; line-height: 1.1; }
+    .cover-biotech .journal-cover-bottom { color: #fb923c; background: rgba(251,146,60,0.2); }
+
+    .cover-arxiv { background: linear-gradient(135deg, #4338ca 0%, #5b21b6 50%, #7c3aed 100%); box-shadow: inset 0 20px 40px rgba(0,0,0,0.3); }
+    .cover-arxiv .journal-cover-top { color: #c7d2fe; font-size: 11px; letter-spacing: 3px; }
+    .cover-arxiv .journal-cover-title { font-family: monospace; color: #ffffff; font-size: 28px; letter-spacing: 2px; }
+    .cover-arxiv .journal-cover-bottom { color: #a5b4fc; background: rgba(255,255,255,0.1); letter-spacing: 2px; font-size: 11px; }
+    .btn-edit { padding: 10px 20px; background: white; color: #475569; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .btn-edit:hover { border-color: #3b82f6; color: #3b82f6; }
+    .btn-save { padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 10px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .btn-save:hover { opacity: 0.9; }
+
+    /* Paper Content - translated text styling */
+    .translated-hint { font-size: 11px; color: #94a3b8; font-style: italic; margin-top: 4px; }
   </style>
 </head>
 <body>
@@ -236,9 +314,36 @@
       <div class="main-content">
         <div id="profile-header"></div>
         <div class="profile-stats" id="profile-stats"></div>
-        <div style="display:flex; gap:12px;">
+        <div style="display:flex; gap:12px; margin-bottom: 24px;">
           <button class="btn-read" onclick="app.navigate('bookmarks')">我的收藏</button>
           <button class="btn-login" onclick="app.toggleHistoryVisibility()">切换历史可见性</button>
+        </div>
+        <!-- System Settings -->
+        <div class="settings-section">
+          <h3>⚙️ 系统设置</h3>
+          <div class="settings-item">
+            <div>
+              <div class="settings-label">论文内容语言</div>
+              <div style="font-size: 13px; color: #94a3b8; margin-top: 4px;">Paper Content Language</div>
+            </div>
+            <div>
+              <button class="lang-btn active" onclick="app.setLanguage('zh')" id="lang-zh">中文</button>
+              <button class="lang-btn" onclick="app.setLanguage('en')" id="lang-en">English</button>
+              <span class="lang-status" id="lang-status">当前：中文</span>
+            </div>
+          </div>
+        </div>
+        <!-- Journal Library -->
+        <div class="journal-section">
+          <div class="journal-header">
+            <h2>📚 我的期刊库</h2>
+            <div class="journal-actions" id="journal-actions">
+              <button class="btn-edit" id="journal-edit-btn" onclick="app.toggleJournalEditMode()">编辑</button>
+              <button class="btn-save" id="journal-save-btn" onclick="app.saveJournalSelection()" style="display:none;">保存</button>
+            </div>
+          </div>
+          <div id="journal-message" style="color:#94a3b8; font-size:14px; margin-bottom:16px; display:none;"></div>
+          <div class="journal-grid" id="journal-grid"></div>
         </div>
       </div>
     </div>
@@ -300,11 +405,83 @@
   </main>
 
   <script>
-    const API_BASE = window.location.origin === 'http://localhost:3001' ? 'http://localhost:8000/api' : '/api';
+    const API_BASE = (window.location.origin === 'http://localhost:3001' || window.location.origin === 'http://localhost:8080') ? 'http://localhost:8000/api' : '/api';
     let token = localStorage.getItem('token');
     let currentUser = null;
     let pageHistory = [];
     let currentPage = 'home';
+
+    // ===== Language & Translation =====
+    let currentLang = localStorage.getItem('language') || 'zh';
+    const translationCache = JSON.parse(localStorage.getItem('translationCache') || '{}');
+
+    // UI text translations
+    const i18n = {
+      zh: {
+        '首页': '首页', '论文': '论文', '发现': '发现', '动态': '动态',
+        '好友': '好友', '收藏': '收藏', '我的': '我的',
+        '登录': '登录', '注册': '注册', '退出': '退出',
+        '搜索论文标题、作者或关键词...': '搜索论文标题、作者或关键词...',
+        '收录论文': '收录论文', '活跃用户': '活跃用户', '合作期刊': '合作期刊',
+        '最新论文': '最新论文', '暂无论文': '暂无论文',
+        '暂无摘要': '暂无摘要', '阅读原文': '阅读原文', '收藏': '收藏',
+        '引用数': '引用数', '引文图谱': '引文图谱',
+        '探索学术前沿，连接科研社群': '探索学术前沿，连接科研社群',
+        '发现最新论文，追踪科研动态，与全球学者交流': '发现最新论文，追踪科研动态，与全球学者交流',
+        '我的收藏': '我的收藏', '切换历史可见性': '切换历史可见性',
+        '系统设置': '系统设置', '论文内容语言': '论文内容语言',
+        '中文': '中文', '当前：中文': '当前：中文',
+      },
+      en: {
+        '首页': 'Home', '论文': 'Papers', '发现': 'Discover', '动态': 'Feed',
+        '好友': 'Friends', '收藏': 'Bookmarks', '我的': 'Profile',
+        '登录': 'Login', '注册': 'Register', '退出': 'Logout',
+        '搜索论文标题、作者或关键词...': 'Search papers by title, authors, or keywords...',
+        '收录论文': 'Papers Indexed', '活跃用户': 'Active Users', '合作期刊': 'Partner Journals',
+        '最新论文': 'Latest Papers', '暂无论文': 'No papers yet',
+        '暂无摘要': 'No abstract available', '阅读原文': 'Read Paper', '收藏': 'Bookmark',
+        '引用数': 'Citations', '引文图谱': 'Citation Graph',
+        '探索学术前沿，连接科研社群': 'Explore academic frontiers, connect with research communities',
+        '发现最新论文，追踪科研动态，与全球学者交流': 'Discover the latest papers, track research trends, and connect with scholars worldwide',
+        '我的收藏': 'My Bookmarks', '切换历史可见性': 'Toggle History Visibility',
+        '系统设置': 'System Settings', '论文内容语言': 'Paper Content Language',
+        '中文': 'Chinese', '当前：中文': 'Current: Chinese',
+      }
+    };
+
+    function t(text) {
+      if (!text || currentLang === 'zh') return text;  // UI 文本默认中文，zh 模式直接返回
+      return i18n[currentLang] && i18n[currentLang][text] ? i18n[currentLang][text] : text;
+    }
+
+    async function translateText(text, targetLang) {
+      if (!text || !text.trim()) return text;
+      if (targetLang === 'en') return text;  // 论文原文就是英文
+      const cacheKey = `${targetLang}:${text.substring(0, 100)}`;
+      if (translationCache[cacheKey]) return translationCache[cacheKey];
+      try {
+        const res = await api.post('/translate', { text: text.substring(0, 2500), target_lang: targetLang });
+        if (res && res.translated) {
+          translationCache[cacheKey] = res.translated;
+          if (Object.keys(translationCache).length > 200) {
+            for (let k in translationCache) { if (Object.keys(translationCache).length > 200) delete translationCache[k]; else break; }
+          }
+          localStorage.setItem('translationCache', JSON.stringify(translationCache));
+          return res.translated;
+        }
+      } catch (e) { console.warn('翻译失败:', e); }
+      return text;
+    }
+
+    async function translatePaper(paper) {
+      if (!paper || currentLang === 'en') return paper;  // 英文模式：论文就是英文，不翻译
+      // 中文模式：翻译标题和摘要，作者名保持英文
+      if (paper.title) paper.title = await translateText(paper.title, currentLang);
+      if (paper.abstract) paper.abstract = await translateText(paper.abstract, currentLang);
+      return paper;
+    }
+
+    // ====================================================
 
     const api = {
       async request(path, options = {}) {
@@ -402,22 +579,34 @@
         const countEl = document.getElementById('home-count');
         grid.innerHTML = '<div class="spinner"></div>';
         const data = await api.get('/papers/?page=1&page_size=6');
+        // 中文模式下翻译论文
+        let papers = data.papers || [];
+        if (currentLang === 'zh') {
+          papers = await Promise.all(papers.map(p => translatePaper({...p})));
+        }
         countEl.textContent = `发现 ${data.total || 0} 篇前沿论文`;
-        grid.innerHTML = (data.papers || []).map(renderPaperCard).join('') || '暂无论文';
+        grid.innerHTML = papers.map(renderPaperCard).join('') || '暂无论文';
       },
 
       async renderPapers() {
         const grid = document.getElementById('papersGrid');
         grid.innerHTML = '<div class="spinner"></div>';
         const data = await api.get('/papers/?page=1&page_size=50');
-        grid.innerHTML = (data.papers || []).map(renderPaperCard).join('') || '暂无论文';
+        let papers = data.papers || [];
+        if (currentLang === 'zh') {
+          papers = await Promise.all(papers.map(p => translatePaper({...p})));
+        }
+        grid.innerHTML = papers.map(renderPaperCard).join('') || '暂无论文';
       },
 
       async openPaper(id) {
         this.navigate('paper-detail');
         const contentDiv = document.getElementById('paperDetail');
         contentDiv.innerHTML = '<div class="spinner"></div>';
-        const paper = await api.get(`/papers/${id}`);
+        let paper = await api.get(`/papers/${id}`);
+        if (currentLang === 'zh') {
+          paper = await translatePaper({...paper});
+        }
         const j = paper.journal || {};
         contentDiv.innerHTML = `
           <div class="paper-detail">
@@ -506,7 +695,11 @@
             </div>
           </div>`;
         const data = await api.get('/papers/recommendations/trending?limit=6');
-        document.getElementById('trendingGrid').innerHTML = (data.papers || []).map(renderPaperCard).join('') || '暂无推荐';
+        let trendingPapers = data.papers || [];
+        if (currentLang === 'zh') {
+          trendingPapers = await Promise.all(trendingPapers.map(p => translatePaper({...p})));
+        }
+        document.getElementById('trendingGrid').innerHTML = trendingPapers.map(renderPaperCard).join('') || '暂无推荐';
         document.getElementById('search-input').addEventListener('keypress', e => e.key === 'Enter' && app.searchPapers());
       },
 
@@ -517,7 +710,11 @@
         const grid = document.getElementById('searchGrid');
         grid.innerHTML = '<div class="spinner"></div>';
         const data = await api.get(`/papers/search?q=${encodeURIComponent(q)}`);
-        grid.innerHTML = (data.papers || []).map(renderPaperCard).join('') || '未找到相关论文';
+        let searchPapers = data.papers || [];
+        if (currentLang === 'zh') {
+          searchPapers = await Promise.all(searchPapers.map(p => translatePaper({...p})));
+        }
+        grid.innerHTML = searchPapers.map(renderPaperCard).join('') || '未找到相关论文';
       },
 
       async renderFeed() {
@@ -606,6 +803,8 @@
           <div class="stat-card"><div class="stat-value">${profile.bookmark_count}</div><div class="stat-label">收藏论文</div></div>
           <div class="stat-card"><div class="stat-value">${profile.follow_count}</div><div class="stat-label">关注中</div></div>
         `;
+        this.initLanguageUI();  // 初始化系统设置的语言按钮
+        this.loadJournals();     // 加载期刊库
       },
 
       async renderBookmarks() {
@@ -613,7 +812,11 @@
         if (!currentUser) { this.navigate('login'); return; }
         grid.innerHTML = '<div class="spinner"></div>';
         const data = await api.get('/social/bookmarks'); // Simplified for demo
-        grid.innerHTML = (data || []).map(b => renderPaperCard(b.paper)).join('') || '暂无收藏';
+        let items = data || [];
+        if (currentLang === 'zh') {
+          items = await Promise.all(items.map(async b => ({...b, paper: await translatePaper({...b.paper})})));
+        }
+        grid.innerHTML = items.map(b => renderPaperCard(b.paper)).join('') || '暂无收藏';
       },
 
       async bookmarkPaper(id) {
@@ -775,6 +978,137 @@
         } else {
           authBtns.style.display = 'flex'; userInfo.style.display = 'none';
         }
+      },
+
+      setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('language', lang);
+        // 更新语言按钮状态
+        const zhBtn = document.getElementById('lang-zh');
+        const enBtn = document.getElementById('lang-en');
+        const status = document.getElementById('lang-status');
+        if (zhBtn) zhBtn.classList.toggle('active', lang === 'zh');
+        if (enBtn) enBtn.classList.toggle('active', lang === 'en');
+        if (status) status.textContent = lang === 'zh' ? '当前：中文' : 'Current: English';
+        // 重新渲染所有显示论文的页面
+        if (currentPage === 'home') app.renderHome();
+        else if (currentPage === 'papers') app.renderPapers();
+        else if (currentPage === 'explore') app.renderExplore();
+        else if (currentPage === 'bookmarks') app.renderBookmarks();
+      },
+
+      initLanguageUI() {
+        // 初始化语言按钮状态（页面加载后，profile 页面元素可能还不存在
+        const zhBtn = document.getElementById('lang-zh');
+        const enBtn = document.getElementById('lang-en');
+        const status = document.getElementById('lang-status');
+        if (zhBtn) zhBtn.classList.toggle('active', currentLang === 'zh');
+        if (enBtn) enBtn.classList.toggle('active', currentLang === 'en');
+        if (status) status.textContent = currentLang === 'zh' ? '当前：中文' : 'Current: English';
+      },
+
+      // 期刊库功能
+      journalEditMode: false,
+      allJournals: [],
+      selectedJournalIds: new Set(),
+
+      async loadJournals() {
+        const grid = document.getElementById('journal-grid');
+        if (!grid) return;
+        if (!currentUser) { return; }
+        grid.innerHTML = '<div class="spinner"></div>';
+
+        try {
+          // 并行获取所有期刊和用户已订阅的期刊
+          const [allJournals, userJournals] = await Promise.all([
+            api.get('/papers/journals'),
+            api.get('/papers/journals/user/mine')
+          ]);
+          this.allJournals = allJournals || [];
+          this.selectedJournalIds = new Set((userJournals || []).map(j => j.id));
+          this.renderJournals();
+        } catch (e) {
+          grid.innerHTML = '<div style="color:#94a3b8;">加载期刊失败</div>';
+        }
+      },
+
+      renderJournals() {
+        const grid = document.getElementById('journal-grid');
+        const msg = document.getElementById('journal-message');
+        const editBtn = document.getElementById('journal-edit-btn');
+        const saveBtn = document.getElementById('journal-save-btn');
+
+        // 显示哪些期刊：编辑模式显示全部，平时只显示已订阅的
+        let displayJournals;
+        if (this.journalEditMode) {
+          displayJournals = this.allJournals;
+          if (msg) { msg.style.display = 'block'; msg.textContent = '请选择您感兴趣的期刊（点击期刊封面切换选中状态）'; }
+        } else {
+          displayJournals = this.allJournals.filter(j => this.selectedJournalIds.has(j.id));
+          if (msg) { msg.style.display = displayJournals.length === 0 ? 'block' : 'none'; msg.textContent = '您还没有订阅任何期刊。点击"编辑"开始选择感兴趣的期刊。'; }
+        }
+
+        if (editBtn) { editBtn.style.display = 'inline-block'; editBtn.textContent = this.journalEditMode ? '取消' : '编辑'; }
+        if (saveBtn) { saveBtn.style.display = this.journalEditMode ? 'inline-block' : 'none'; }
+
+        if (!grid) return;
+        // 期刊名称到本地封面图片文件的映射
+        const coverImages = {
+          'Nature': 'covers/nature.jpg',
+          'Science': 'covers/science.jpg',
+          'Cell': 'covers/cell.jpg',
+          'The Lancet': 'covers/lancet.jpg',
+          'Nature Neuroscience': 'covers/nature-neuroscience.jpg',
+          'Nature Biotechnology': 'covers/nature-biotechnology.jpg',
+          'arXiv': 'covers/arxiv.jpg'
+        };
+
+        grid.innerHTML = displayJournals.map(j => {
+          const isSelected = this.selectedJournalIds.has(j.id);
+          const showCheckbox = this.journalEditMode;
+          const coverImg = coverImages[j.name] || 'covers/nature.jpg';
+          return `
+            <div class="journal-card ${isSelected ? 'selected' : ''}" data-id="${j.id}" onclick="app.toggleJournal(${j.id})">
+              ${showCheckbox ? `<div class="journal-checkbox">${isSelected ? '✓' : ''}</div>` : ''}
+              <div class="journal-cover">
+                <img src="${coverImg}" alt="${j.name} cover" onerror="this.style.display='none'">
+              </div>
+              <div class="journal-name">${j.name}</div>
+              <div class="journal-info">
+                <span class="journal-if">IF ${j.impact_factor || 'N/A'}</span>
+                ${j.volume && j.issue ? `<span class="journal-issue">第 ${j.volume} 卷 ${j.issue} 期</span>` : (j.name.toLowerCase().includes('arxiv') ? '<span class="journal-issue">预印本</span>' : '')}
+              </div>
+            </div>
+          `;
+        }).join('');
+      },
+
+      toggleJournalEditMode() {
+        this.journalEditMode = !this.journalEditMode;
+        this.renderJournals();
+      },
+
+      toggleJournal(journalId) {
+        if (!this.journalEditMode) return; // 编辑模式下才能切换
+        if (this.selectedJournalIds.has(journalId)) {
+          this.selectedJournalIds.delete(journalId);
+        } else {
+          this.selectedJournalIds.add(journalId);
+        }
+        this.renderJournals();
+      },
+
+      async saveJournalSelection() {
+        if (!currentUser) { alert('请先登录'); this.navigate('login'); return; }
+        const journalIds = Array.from(this.selectedJournalIds);
+        try {
+          await api.post('/papers/journals/user/mine', { journal_ids: journalIds });
+          this.journalEditMode = false;
+          this.renderJournals();
+          alert(`已成功订阅 ${journalIds.length} 个期刊！`);
+        } catch (e) {
+          alert('保存失败，请重试');
+        }
       }
     };
 
@@ -791,6 +1125,7 @@
         if (me.id) currentUser = me; else { token = null; localStorage.removeItem('token'); }
       }
       app.updateAuthUI();
+      app.initLanguageUI();
       const startPage = location.hash ? location.hash.slice(1) : 'home';
       history.replaceState({ page: startPage }, '', '#' + startPage);
       app.navigate(startPage, true);
