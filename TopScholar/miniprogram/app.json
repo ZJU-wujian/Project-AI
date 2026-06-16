@@ -21,19 +21,27 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "发现"
+        "text": "发现",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
       },
       {
         "pagePath": "pages/journals/journals",
-        "text": "期刊"
+        "text": "期刊",
+        "iconPath": "images/tab-journal.png",
+        "selectedIconPath": "images/tab-journal-active.png"
       },
       {
         "pagePath": "pages/search/search",
-        "text": "搜索"
+        "text": "搜索",
+        "iconPath": "images/tab-search.png",
+        "selectedIconPath": "images/tab-search-active.png"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "images/tab-user.png",
+        "selectedIconPath": "images/tab-user-active.png"
       }
     ]
   },
